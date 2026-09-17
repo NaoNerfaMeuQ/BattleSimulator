@@ -1,0 +1,32 @@
+# Visual Studio files and caches
+.vs/
+*.user
+*.userosscache
+*.sln.docstates
+*.suo
+
+# Build results and binaries
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Bb]in/
+[Oo]bj/
+*.exe
+*.dll
+*.so
+*.dylib
+*.pdb
+*.ilk
+*.obj
+*.iobj
+*.ipdb
+*.tlog
+*.log
+*.recipe
+*.lastbuildstate
+
+# Project specific build outputs
+BattleSimulator/x64/
+BattleSimulator/Debug/
+BattleSimulator/Release/
