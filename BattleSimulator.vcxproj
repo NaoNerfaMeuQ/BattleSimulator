@@ -148,12 +148,14 @@
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\Team.cpp" />
     <ClCompile Include="src\Warrior.cpp" />
+    <ClCompile Include="src\Weapon.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Character.h" />
     <ClInclude Include="include\Mage.h" />
     <ClInclude Include="include\Team.h" />
     <ClInclude Include="include\Warrior.h" />
+    <ClInclude Include="include\Weapon.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,5 +1,7 @@
 #pragma once
 #include <string>
+#include <memory>
+#include "Weapon.h"
 
 class Character
 {
@@ -7,6 +9,7 @@ private:
 	std::string name;
 	int health;
 	int attackPower;
+	std::unique_ptr<Weapon> equippedWeapon;
 
 public:
 
@@ -41,13 +44,27 @@ public:
 
 	int getAttackPower()
 	{
-		return attackPower;
+		if (equippedWeapon)
+		{
+			return attackPower + equippedWeapon->getAttackBonus();
+		}
+		else
+		{
+			return attackPower;
+		}
+	
 	}
 
 
 	// Por qual motivo não tem mais 2 parâmetros? Agora o atacante não é mais um parâmetro, é o próprio objeto que chama o método
 	// Antes era attacker.attackPower, agora só escreve attackPower direto
 	virtual void performAttack(Character& target);
+
+	// Parte de armas
+
+	// Declara a função equipeWeapon
+	void equipWeapon(std::unique_ptr<Weapon> weapon);
+
 
 
 

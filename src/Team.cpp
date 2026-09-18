@@ -5,7 +5,7 @@
 #include "Character.h"
 
 
-
+//Função para adicionar novo personagem dentro de um vector de Character
 void Team::addCharacter(std::unique_ptr<Character> character)
 {
 	characters.push_back(std::move(character));
@@ -66,8 +66,10 @@ bool Team::isAlive()
 //}
 
 
+// Percorre TODOS os personagens automaticamente, ele decide quem ataca quem, sem intervenção do jogador
 void Team::attackTeam(Team& enemyTeam)
 {
+	//Compara o maior valor entre os dois parametros
 	size_t maxSize = std::max(characters.size(), enemyTeam.characters.size());
 
 	for (size_t i = 0; i < maxSize; i++)
@@ -120,5 +122,56 @@ void Team::printAllHealth()
 	}
 }
 
+void Team::printNumberedHealth()
+{
+	
+	int index = 1;
+	for (const auto& member : characters)
+	{
+		if (member->getHealth() > 0)
+		{
+			std::cout << index << ") " << member->getName() << " - " << member->getHealth() << " HP" << std::endl;
+			index++;
+		}
+	}
+}
 
 
+// Diferente do attackTeam(), não precisamos de for pois quem escolhe é o jogador
+// return não tem valor pois só sai da função sem retornar nada - proteção se a validação falhar -
+void Team::attackCharacter(int attackerIndex, Team& enemyTeam, int targetIndex)
+{
+	int realAttackerIndex = attackerIndex - 1;
+	int realTargetIndex = targetIndex - 1;
+
+	// 1. Valida se os índices estão dento dos limites dos dois vectors
+	if (realAttackerIndex < 0 || realTargetIndex >= characters.size())
+	{
+		std::cout << "Invalid attacker choice" << std::endl;
+		return;
+	}
+
+	if (realTargetIndex < 0 || realAttackerIndex >= characters.size())
+	{
+		std::cout << "Invalid target choice" << std::endl;
+		return;
+	}
+
+	// 2. Valida se os personagens escolhidos estão vivos
+
+	if (characters[realAttackerIndex]->getHealth() <= 0)
+	{
+		std::cout << "That character is dead and cannot attack." << std::endl;
+		return;
+	}
+
+	if (characters[realTargetIndex]->getHealth() <= 0)
+	{
+		std::cout << "That target is already dead." << std::endl;
+		return;
+	}
+
+	// Caso tudo validado: ataca diretamente os dois personagens escolhidos
+	characters[realAttackerIndex]->performAttack(*enemyTeam.characters[realTargetIndex]);
+
+}

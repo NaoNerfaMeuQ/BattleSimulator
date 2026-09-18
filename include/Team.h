@@ -30,4 +30,7 @@ public:
 
 	void printAllHealth();
 
+	void printNumberedHealth();
+
+	void attackCharacter(int attackerIndex, Team& enemyTeam, int targetIndex);
 };

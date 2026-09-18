@@ -11,61 +11,78 @@
 int main()
 {
 
-	Team heroTeam;
-	heroTeam.addCharacter(std::make_unique<Warrior>("Hero", 100, 10));
-	heroTeam.addCharacter(std::make_unique<Warrior>("Warrior", 100, 10));
-	heroTeam.addCharacter(std::make_unique<Mage>("Mage", 100, 10, 10));
 
-	std::cout << "\n===============\n" << std::endl;
+	Team heroTeam;
+
+	// Hero e Sword criados
+	auto hero = std::make_unique<Character>("Hero", 100, 10);
+	hero->equipWeapon(std::make_unique<Weapon>("Sword", 10));
+	heroTeam.addCharacter(std::move(hero));
+
+	//Warrior criado
+	heroTeam.addCharacter(std::make_unique<Warrior>("Warrior", 100, 15));
+
 
 	Team orkTeam;
-	orkTeam.addCharacter(std::make_unique<Warrior>("Ork", 100, 10));
-	orkTeam.addCharacter(std::make_unique<Warrior>("Globin", 100, 10));
+
+	// Ork e Mace criados
+	auto ork = std::make_unique<Character>("Ork", 100, 10);
+	ork->equipWeapon(std::make_unique<Weapon>("Mace", 10));
+	orkTeam.addCharacter(std::move(ork));
+
+	// Wizard criado
+	orkTeam.addCharacter(std::make_unique<Mage>("Wizard", 100, 5, 100));
 
 
-	std::cout << "\n===============\n" << std::endl;
-
-
+	//srand gera uma seed aleatória e static_cast faz a conversão numérica de t_time (formato que retorna) para unsigned int
+	//time(NULL) retornar o tempo exato do sistema desde 1970 - Unix epoch -
 	srand(static_cast<unsigned int>(time(NULL)));
 
-	heroTeam.printAllHealth();
-	orkTeam.printAllHealth();
-
-	std::cout << "\n===============\n" << std::endl;
-
-
-
-	bool heroTurn = true;
 	while (heroTeam.isAlive() && orkTeam.isAlive())
 	{
+		// turno do jogador (heroTeam)
+		std::cout << "\n=== Your turn ===" << std::endl;
 
-		if (heroTurn)
+		std::cout << "\nYour team:" << std::endl;
+		heroTeam.printNumberedHealth();
+
+		std::cout << "\nEnemy team:" << std::endl;
+		orkTeam.printNumberedHealth();
+
+		int attackerChoice;
+		std::cout << "\nChoose your attacker (number): ";
+		// Pega a escolha do jogador para atacante
+		std::cin >> attackerChoice;
+
+		int targetChoice;
+		std::cout << "Choose your target (number): ";
+		// Pega a escolha do jogador para quem atacar
+		std::cin >> targetChoice;
+
+		heroTeam.attackCharacter(attackerChoice, orkTeam, targetChoice);
+		orkTeam.removeDead();
+
+
+		//Verifica se o OrkTeam está morto, se estiver para de repetir o loop e não fica chamando turnos fantasmas
+		if (!orkTeam.isAlive())
 		{
-			heroTeam.attackTeam(orkTeam);
-			//std::cout << "Ork was attacked! Health: " << orkTeam.characters[0]->health << std::endl;
-			orkTeam.removeDead();
+			break;
 		}
-		else
-		{
-			orkTeam.attackTeam(heroTeam);
-			//std::cout << "Hero was attacked! Health: " << heroTeam.characters[0]->health << std::endl;
-			heroTeam.removeDead();
-		}
-		heroTurn = !heroTurn;
+
+		// Turno do computador (orkTeam)
+		std::cout << "\n=== Enemy turn ===" << std::endl;
+		orkTeam.attackTeam(heroTeam);
+		heroTeam.removeDead();
 	}
 
 	if (heroTeam.isAlive())
 	{
-		std::cout << "Hero team wins!" << std::endl;
+		std::cout << "\nHero team wins!" << std::endl;
 	}
 	else
 	{
-		std::cout << "Ork team wins!" << std::endl;
-
+		std::cout << "\nOrk team wins!" << std::endl;
 	}
-
-
-
 
 	return 0;
 }
