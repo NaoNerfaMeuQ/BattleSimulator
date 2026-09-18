@@ -38,17 +38,21 @@ Projeto desenvolvido no **Visual Studio** (C++17 ou superior).
 BattleSimulator/
 ├── include/
 │   ├── Character.h
-│   └── Team.h
+│   ├── Mage.h
+│   ├── Team.h
+│   └── Warrior.h
 ├── src/
 │   ├── Character.cpp
+│   ├── Mage.cpp
+│   ├── Main.cpp
 │   ├── Team.cpp
-│   └── Main.cpp
+│   └── Warrior.cpp
 └── BattleSimulator.sln
 ```
 
 ## 🚧 Próximos passos
 
-- [ ] Subclasses de `Character` (ex: `Warrior`, `Mage`) com `performAttack()` sobrescrito
+- [x] Subclasses de `Character` (ex: `Warrior`, `Mage`) com `performAttack()` sobrescrito
 - [ ] Sistema de itens/equipamento (composição)
 - [ ] Interação via `std::cin` (escolha de ações pelo jogador)
 

@@ -40,3 +40,4 @@ void characterHealthPrint(Character& target)
 {
 	std::cout << target.getName() << " health before: " << target.getHealth() << "\n" << std::endl;
 }
+

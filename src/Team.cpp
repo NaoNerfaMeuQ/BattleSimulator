@@ -6,10 +6,15 @@
 
 
 
-void Team::addCharacter(std::string name, int health, int attackPower)
+void Team::addCharacter(std::unique_ptr<Character> character)
 {
-	characters.push_back(std::make_unique<Character>(name, health, attackPower));
+	characters.push_back(std::move(character));
 }
+
+//void Team::addCharacter(std::string name, int health, int attackPower)
+//{
+//	characters.push_back(std::make_unique<Character>(name, health, attackPower));
+//}
 
 bool Team::isAlive()
 {

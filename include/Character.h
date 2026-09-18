@@ -11,7 +11,7 @@ private:
 public:
 
 	Character(std::string characterName, int startHealth, int startAttack);
-	~Character();
+	virtual ~Character();
 
 
 	void setName(std::string newName)
@@ -56,4 +56,5 @@ public:
 // void attack(Character& attacker, Character& target); - colocar dentro da classe para tornar uma fuñção virtual e muda de nome para performAttack
 
 void characterHealthPrint(Character& printhealth);
+
 

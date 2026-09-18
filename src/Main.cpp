@@ -3,6 +3,8 @@
 #include <ctime>
 #include "Character.h"
 #include "Team.h"
+#include "Warrior.h"
+#include "Mage.h"
  
 
 
@@ -10,14 +12,15 @@ int main()
 {
 
 	Team heroTeam;
-	heroTeam.addCharacter("Hero", 30, 10);
-	heroTeam.addCharacter("Warrior", 100, 5);
+	heroTeam.addCharacter(std::make_unique<Warrior>("Hero", 100, 10));
+	heroTeam.addCharacter(std::make_unique<Warrior>("Warrior", 100, 10));
+	heroTeam.addCharacter(std::make_unique<Mage>("Mage", 100, 10, 10));
 
 	std::cout << "\n===============\n" << std::endl;
 
 	Team orkTeam;
-	orkTeam.addCharacter("Ork", 100, 10);
-	orkTeam.addCharacter("Globin", 100, 10);
+	orkTeam.addCharacter(std::make_unique<Warrior>("Ork", 100, 10));
+	orkTeam.addCharacter(std::make_unique<Warrior>("Globin", 100, 10));
 
 
 	std::cout << "\n===============\n" << std::endl;
