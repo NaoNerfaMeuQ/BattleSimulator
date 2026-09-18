@@ -138,13 +138,13 @@ void Team::attackCharacter(int attackerIndex, Team &enemyTeam, int targetIndex)
   int realTargetIndex = targetIndex - 1;
 
   // 1. Valida se os índices estão dento dos limites dos dois vectors
-  if (realAttackerIndex < 0 || realTargetIndex >= characters.size()) 
+  if (realAttackerIndex < 0 || realAttackerIndex >= characters.size()) 
   {
     std::cout << "Invalid attacker choice" << std::endl;
     return;
   }
 
-  if (realTargetIndex < 0 || realAttackerIndex >= enemyTeam.characters.size()) 
+  if (realTargetIndex < 0 || realTargetIndex >= enemyTeam.characters.size()) 
   {
     std::cout << "Invalid target choice" << std::endl;
     return;
@@ -158,7 +158,7 @@ void Team::attackCharacter(int attackerIndex, Team &enemyTeam, int targetIndex)
     return;
   }
 
-  if (characters[realTargetIndex]->getHealth() <= 0) 
+  if (enemyTeam.characters[realTargetIndex]->getHealth() <= 0) 
   {
     std::cout << "That target is already dead." << std::endl;
     return;
