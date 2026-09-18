@@ -19,7 +19,7 @@ Character::~Character() {
 
 void Character::performAttack(Character& target)
 {
-	target.setHealth(target.getHealth() - attackPower);
+	target.setHealth(target.getHealth() - getAttackPower());
 	std::cout << target.getName() << " was attacked by: " << name << std::endl;
 	std::cout << target.getName() << " Health: " << target.getHealth() << std::endl;
 	std::cout << "\n=============\n" << std::endl;

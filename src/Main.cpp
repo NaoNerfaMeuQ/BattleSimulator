@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
+#include <limits>
 #include "Character.h"
 #include "Team.h"
 #include "Warrior.h"
@@ -53,6 +54,17 @@ int main()
 		std::cout << "\nChoose your attacker (number): ";
 		// Pega a escolha do jogador para atacante
 		std::cin >> attackerChoice;
+
+		if (std::cin.fail())
+		{
+			// limpa o estado de erro
+			std::cin.clear(); 
+			// descarta o que sobrou no buffer
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			std::cout << "Invalid input. Skipping turn." << std::endl;
+			//volta pro top do while, sem tentar atacar
+			continue;
+		}
 
 		int targetChoice;
 		std::cout << "Choose your target (number): ";

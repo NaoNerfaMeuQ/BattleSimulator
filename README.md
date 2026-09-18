@@ -55,7 +55,7 @@ BattleSimulator/
 │   ├── Weapon.cpp
 │   ├── Team.cpp
 │   └── Main.cpp
-└── BattleSimulator.sln
+└── BattleSimulator.slnx
 ```
 
 ## 🚧 Próximos passos
