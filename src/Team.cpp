@@ -167,3 +167,15 @@ void Team::attackCharacter(int attackerIndex, Team &enemyTeam, int targetIndex)
   // Caso tudo validado: ataca diretamente os dois personagens escolhidos
   characters[realAttackerIndex]->performAttack(*enemyTeam.characters[realTargetIndex]);
 }
+
+int Team::getCharacterHealth(int index)
+{
+    int realIndex = index - 1;
+    
+    if (realIndex < 0 || realIndex >= characters.size())
+    {
+        return -1; //índice inválido - sentinela
+    }
+
+    return characters[realIndex]->getHealth();
+}

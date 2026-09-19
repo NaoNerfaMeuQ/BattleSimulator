@@ -30,3 +30,11 @@ x86/
 BattleSimulator/x64/
 BattleSimulator/Debug/
 BattleSimulator/Release/
+BattleSimulatorTests/x64/
+BattleSimulatorTests/Debug/
+BattleSimulatorTests/Release/
+
+# NuGet Packages
+packages/
+*.nupkg
+

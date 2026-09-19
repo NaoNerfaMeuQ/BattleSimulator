@@ -18,6 +18,7 @@ Este projeto nasceu como exercício prático para aprender C++ do zero, partindo
 - **Semântica de referência vs. ponteiro vs. cópia** — incluindo o motivo de `std::vector<std::unique_ptr<T>>` ser preferível a `std::vector<T>` quando a estabilidade de endereço de memória importa
 - **Organização de projeto em C++** — separação de declaração (`.h`) e implementação (`.cpp`), `#pragma once`, e configuração de `Include Directories` no Visual Studio
 - **Entrada de dados via `std::cin`** — leitura da escolha do jogador (atacante e alvo) a cada turno, com validação de índice antes de aplicar o ataque
+- **Testes automatizados (Google Test)** — testes unitários cobrindo construção de `Character`, validação de índices em `attackCharacter()` (incluindo um teste de regressão para um bug de comparação de índices já corrigido) e o cálculo de dano com arma equipada
 
 ## 🕹️ Como funciona
 
@@ -34,9 +35,19 @@ Este projeto nasceu como exercício prático para aprender C++ do zero, partindo
 Projeto desenvolvido no **Visual Studio** (C++17 ou superior).
 
 1. Clone o repositório
-2. Abra `BattleSimulator.sln` no Visual Studio
+2. Abra `BattleSimulator.slnx` no Visual Studio
 3. Compile em `Debug` ou `Release` (x64)
 4. Execute — o resultado da batalha aparece no console
+
+## ✅ Testes
+
+O projeto `BattleSimulatorTests` usa **Google Test**, integrado nativamente ao Visual Studio (componente "Test Adapter for Google Test").
+
+1. Abra a solução no Visual Studio
+2. `Test > Test Explorer` para abrir a janela de testes
+3. `Build > Rebuild Solution`, depois rode os testes pelo Test Explorer
+
+Cobertura atual: construção de `Character`, rejeição de índices inválidos em `Team::attackCharacter()` e cálculo de `getAttackPower()` com arma equipada.
 
 ## 📁 Estrutura do projeto
 
@@ -55,11 +66,15 @@ BattleSimulator/
 │   ├── Weapon.cpp
 │   ├── Team.cpp
 │   └── Main.cpp
+├── BattleSimulatorTests/
+│   ├── pch.h / pch.cpp
+│   └── test.cpp
 └── BattleSimulator.slnx
 ```
 
 ## 🚧 Próximos passos
 
+- [ ] Mais testes: caso de atacante inválido, e um ataque bem-sucedido de ponta a ponta
 - [ ] Alvo aleatório para o time controlado pelo computador (hoje o pareamento/fallback é determinístico, sempre na mesma ordem)
 - [ ] Mais subclasses de `Character` (ex: `Healer`, com cura em vez de dano; um `Warrior` com contra-ataque automático; um inimigo que rouba mana ao ser atacado por um `Mage`)
 - [ ] Classe `Armor`, equipável como `Weapon`, para bônus de vida/defesa

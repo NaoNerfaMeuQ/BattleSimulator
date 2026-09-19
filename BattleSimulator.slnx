@@ -4,4 +4,5 @@
     <Platform Name="x86" />
   </Configurations>
   <Project Path="BattleSimulator.vcxproj" Id="386c4548-59b1-4b14-826f-14a2bf5240a9" />
+  <Project Path="BattleSimulatorTests/BattleSimulatorTests.vcxproj" Id="ef472371-9636-4694-be86-0ece49e90027" />
 </Solution>
